@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CheckStepperItem">
-        <attr name="checkStepperItemGap" format="dimension"/>
+    <declare-styleable name="CheckStepper">
+        <attr name="lineWidth" format="dimension"/>
+        <attr name="showAboveLine" format="boolean"/>
+        <attr name="showBelowLine" format="boolean"/>
+        <attr name="isBelowLineSelected" format="boolean"/>
+        <attr name="isAboveLineSelected" format="boolean"/>
     </declare-styleable>
 </resources>

@@ -20,12 +20,17 @@ class CheckStepperStateView @JvmOverloads constructor(
     attributeSet,
     defStyleAttr
 ) {
+
+    private var lineWidth = 6f
+    private var showAboveLine = false
+    private var showBelowLine = false
+    private var isAboveLineSelected = false
+    private var isBelowLineSelected = false
+
     init {
         textAlignment = TEXT_ALIGNMENT_CENTER
         gravity = Gravity.CENTER
     }
-
-    private var lineWidth = 6
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         // super.onMeasure(widthMeasureSpec, heightMeasureSpec)
@@ -35,6 +40,26 @@ class CheckStepperStateView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         drawShape(canvas)
         super.onDraw(canvas)
+    }
+
+    fun setLineWidth(lineWidth: Float) {
+        this.lineWidth = lineWidth
+    }
+
+    fun setShowAboveLine(showAboveLine: Boolean) {
+        this.showAboveLine = showAboveLine
+    }
+
+    fun setShowBelowLine(showBelowLine: Boolean) {
+        this.showBelowLine = showBelowLine
+    }
+
+    fun setAboveLineSelected(isAboveLineSelected: Boolean) {
+        this.isAboveLineSelected = isAboveLineSelected
+    }
+
+    fun setBelowLineSelected(isBelowLineSelected: Boolean) {
+        this.isBelowLineSelected = isBelowLineSelected
     }
 
     private fun drawShape(canvas: Canvas?) {
@@ -58,32 +83,42 @@ class CheckStepperStateView @JvmOverloads constructor(
             isAntiAlias = true
         }
         paintLineUp.apply {
-            color = getColour(R.color.unselected_background)
+            color = if (isAboveLineSelected) {
+                getColour(R.color.selected_background)
+            } else {
+                getColour(R.color.unselected_background)
+            }
             style = Paint.Style.FILL
             isAntiAlias = true
         }
         paintLineDown.apply {
-            color = getColour(R.color.unselected_background)
+            color = if (isBelowLineSelected) {
+                getColour(R.color.selected_background)
+            } else {
+                getColour(R.color.unselected_background)
+            }
             style = Paint.Style.FILL
             isAntiAlias = true
         }
         pathLineUp.apply {
-            moveTo(((width / 2) - (lineWidth / 2)).toFloat(), 0F)
-            lineTo(((width / 2) + (lineWidth / 2)).toFloat(), 0F)
-            lineTo(((width / 2) + (lineWidth / 2)).toFloat(), (height / 5).toFloat())
-            lineTo(((width / 2) - (lineWidth / 2)).toFloat(), (height / 5).toFloat())
+            moveTo(((width / 2) - (lineWidth / 2)), 0F)
+            lineTo(((width / 2) + (lineWidth / 2)), 0F)
+            lineTo(((width / 2) + (lineWidth / 2)), (height / 5).toFloat())
+            lineTo(((width / 2) - (lineWidth / 2)), (height / 5).toFloat())
         }
         pathLineDown.apply {
-            moveTo(((width / 2) - (lineWidth / 2)).toFloat(), (height / 5).toFloat())
-            lineTo(((width / 2) + (lineWidth / 2)).toFloat(), (height / 5).toFloat())
-            lineTo(((width / 2) + (lineWidth / 2)).toFloat(), height.toFloat())
-            lineTo(((width / 2) - (lineWidth / 2)).toFloat(), height.toFloat())
+            moveTo(((width / 2) - (lineWidth / 2)), (height / 5).toFloat())
+            lineTo(((width / 2) + (lineWidth / 2)), (height / 5).toFloat())
+            lineTo(((width / 2) + (lineWidth / 2)), height.toFloat())
+            lineTo(((width / 2) - (lineWidth / 2)), height.toFloat())
         }
         val cx = (width / 3).toFloat() * 1.5f
         val cy = (height / 3).toFloat() * 1.5f
         val radius = (sqrt((width * width).toDouble() + (height * height).toDouble()) / 6).toFloat()
-        canvas.drawPath(pathLineUp, paintLineUp)
-        canvas.drawPath(pathLineDown, paintLineDown)
+        if (showAboveLine)
+            canvas.drawPath(pathLineUp, paintLineUp)
+        if (showBelowLine)
+            canvas.drawPath(pathLineDown, paintLineDown)
         canvas.drawCircle(cx, cy, radius, paintCircleCenter)
         canvas.drawCircle(
             (cx + (radius * 0.7)).toFloat(),

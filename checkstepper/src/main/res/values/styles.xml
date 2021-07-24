@@ -8,6 +8,7 @@
         <attr name="isBelowLineCompleted" format="boolean"/>
         <attr name="isAboveLineCompleted" format="boolean"/>
         <attr name="isCircleCompleted" format="boolean"/>
+        <attr name="showCompletedText" format="boolean"/>
         <attr name="title" format="string|reference"/>
         <attr name="stateTitle" format="string|reference"/>
     </declare-styleable>

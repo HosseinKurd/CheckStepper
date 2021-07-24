@@ -29,6 +29,7 @@ class CheckStepperStateView @JvmOverloads constructor(
     private var isAboveLineCompleted = true
     private var isBelowLineCompleted = true
     private var isCircleCompleted = true
+    private var showCompletedText = true
 
     init {
         textAlignment = TEXT_ALIGNMENT_CENTER
@@ -81,6 +82,11 @@ class CheckStepperStateView @JvmOverloads constructor(
         invalidate()
     }
 
+    fun setShowCompletedText(showCompletedText: Boolean) {
+        this.showCompletedText = showCompletedText
+        invalidate()
+    }
+
     private fun drawShape(canvas: Canvas?) {
         if (canvas == null) {
             return
@@ -130,8 +136,8 @@ class CheckStepperStateView @JvmOverloads constructor(
             lineTo(((width / 2) - (lineWidth / 2)), (height / 2).toFloat())
         }
         pathLineDown.apply {
-            moveTo(((width / 2) - (lineWidth / 2)), (height-(height / 2)).toFloat())
-            lineTo(((width / 2) + (lineWidth / 2)), (height-(height / 2)).toFloat())
+            moveTo(((width / 2) - (lineWidth / 2)), (height - (height / 2)).toFloat())
+            lineTo(((width / 2) + (lineWidth / 2)), (height - (height / 2)).toFloat())
             lineTo(((width / 2) + (lineWidth / 2)), height.toFloat())
             lineTo(((width / 2) - (lineWidth / 2)), height.toFloat())
         }
@@ -150,6 +156,9 @@ class CheckStepperStateView @JvmOverloads constructor(
                 badgeCircleRadius,
                 paintCircleBadge
             )
+        else if (showCompletedText)
+            setText(R.string.state_title_completed)
+
     }
 
     private fun getColour(resId: Int): Int {

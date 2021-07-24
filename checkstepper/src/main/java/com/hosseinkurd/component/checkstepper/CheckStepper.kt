@@ -28,6 +28,7 @@ class CheckStepper @JvmOverloads constructor(
     private var isAboveLineCompleted = false
     private var isBelowLineCompleted = false
     private var isCircleCompleted = false
+    private var showCompletedText = true
     private var title: String? = null
     private var stateTitle: String? = null
 
@@ -63,6 +64,8 @@ class CheckStepper @JvmOverloads constructor(
                 typedArray.getBoolean(R.styleable.CheckStepper_isBelowLineCompleted, false)
             isCircleCompleted =
                 typedArray.getBoolean(R.styleable.CheckStepper_isCircleCompleted, false)
+            showCompletedText =
+                typedArray.getBoolean(R.styleable.CheckStepper_showCompletedText, false)
             checkStepperStateView.apply {
                 setLineWidth(lineWidth)
                 setBadgeCircleRadius(badgeCircleRadius)
@@ -71,6 +74,7 @@ class CheckStepper @JvmOverloads constructor(
                 setAboveLineCompleted(isAboveLineCompleted)
                 setBelowLineCompleted(isBelowLineCompleted)
                 setCircleCompleted(isCircleCompleted)
+                setShowCompletedText(showCompletedText)
                 invalidate()
             }
             typedArray.recycle()

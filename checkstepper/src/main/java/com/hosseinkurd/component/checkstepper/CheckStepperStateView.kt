@@ -126,12 +126,12 @@ class CheckStepperStateView @JvmOverloads constructor(
         pathLineUp.apply {
             moveTo(((width / 2) - (lineWidth / 2)), 0F)
             lineTo(((width / 2) + (lineWidth / 2)), 0F)
-            lineTo(((width / 2) + (lineWidth / 2)), (height / 5).toFloat())
-            lineTo(((width / 2) - (lineWidth / 2)), (height / 5).toFloat())
+            lineTo(((width / 2) + (lineWidth / 2)), (height / 2).toFloat())
+            lineTo(((width / 2) - (lineWidth / 2)), (height / 2).toFloat())
         }
         pathLineDown.apply {
-            moveTo(((width / 2) - (lineWidth / 2)), (height / 5).toFloat())
-            lineTo(((width / 2) + (lineWidth / 2)), (height / 5).toFloat())
+            moveTo(((width / 2) - (lineWidth / 2)), (height-(height / 2)).toFloat())
+            lineTo(((width / 2) + (lineWidth / 2)), (height-(height / 2)).toFloat())
             lineTo(((width / 2) + (lineWidth / 2)), height.toFloat())
             lineTo(((width / 2) - (lineWidth / 2)), height.toFloat())
         }

@@ -4,7 +4,10 @@
         <attr name="lineWidth" format="dimension"/>
         <attr name="showAboveLine" format="boolean"/>
         <attr name="showBelowLine" format="boolean"/>
-        <attr name="isBelowLineSelected" format="boolean"/>
-        <attr name="isAboveLineSelected" format="boolean"/>
+        <attr name="isBelowLineCompleted" format="boolean"/>
+        <attr name="isAboveLineCompleted" format="boolean"/>
+        <attr name="isCircleCompleted" format="boolean"/>
+        <attr name="title" format="string|reference"/>
+        <attr name="stateTitle" format="string|reference"/>
     </declare-styleable>
 </resources>

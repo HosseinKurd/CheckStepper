@@ -2,6 +2,7 @@ package com.hosseinkurd.component.checkstepper
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.os.Build
@@ -22,14 +23,16 @@ class CheckStepperStateView @JvmOverloads constructor(
 ) {
 
     private var lineWidth = 6f
-    private var showAboveLine = false
-    private var showBelowLine = false
-    private var isAboveLineSelected = false
-    private var isBelowLineSelected = false
+    private var showAboveLine = true
+    private var showBelowLine = true
+    private var isAboveLineCompleted = true
+    private var isBelowLineCompleted = true
+    private var isCircleCompleted = true
 
     init {
         textAlignment = TEXT_ALIGNMENT_CENTER
         gravity = Gravity.CENTER
+        setTextColor(Color.WHITE)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -44,22 +47,32 @@ class CheckStepperStateView @JvmOverloads constructor(
 
     fun setLineWidth(lineWidth: Float) {
         this.lineWidth = lineWidth
+        invalidate()
     }
 
     fun setShowAboveLine(showAboveLine: Boolean) {
         this.showAboveLine = showAboveLine
+        invalidate()
     }
 
     fun setShowBelowLine(showBelowLine: Boolean) {
         this.showBelowLine = showBelowLine
+        invalidate()
     }
 
-    fun setAboveLineSelected(isAboveLineSelected: Boolean) {
-        this.isAboveLineSelected = isAboveLineSelected
+    fun setAboveLineCompleted(isAboveLineSelected: Boolean) {
+        this.isAboveLineCompleted = isAboveLineSelected
+        invalidate()
     }
 
-    fun setBelowLineSelected(isBelowLineSelected: Boolean) {
-        this.isBelowLineSelected = isBelowLineSelected
+    fun setBelowLineCompleted(isBelowLineSelected: Boolean) {
+        this.isBelowLineCompleted = isBelowLineSelected
+        invalidate()
+    }
+
+    fun setCircleCompleted(isCircleSelected: Boolean) {
+        this.isCircleCompleted = isCircleSelected
+        invalidate()
     }
 
     private fun drawShape(canvas: Canvas?) {
@@ -78,12 +91,16 @@ class CheckStepperStateView @JvmOverloads constructor(
             isAntiAlias = true
         }
         paintCircleCenter.apply {
-            color = getColour(R.color.selected_background)
+            color = if (isCircleCompleted) {
+                getColour(R.color.selected_background)
+            } else {
+                getColour(R.color.unselected_background)
+            }
             style = Paint.Style.FILL
             isAntiAlias = true
         }
         paintLineUp.apply {
-            color = if (isAboveLineSelected) {
+            color = if (isAboveLineCompleted) {
                 getColour(R.color.selected_background)
             } else {
                 getColour(R.color.unselected_background)
@@ -92,7 +109,7 @@ class CheckStepperStateView @JvmOverloads constructor(
             isAntiAlias = true
         }
         paintLineDown.apply {
-            color = if (isBelowLineSelected) {
+            color = if (isBelowLineCompleted) {
                 getColour(R.color.selected_background)
             } else {
                 getColour(R.color.unselected_background)
@@ -120,12 +137,13 @@ class CheckStepperStateView @JvmOverloads constructor(
         if (showBelowLine)
             canvas.drawPath(pathLineDown, paintLineDown)
         canvas.drawCircle(cx, cy, radius, paintCircleCenter)
-        canvas.drawCircle(
-            (cx + (radius * 0.7)).toFloat(),
-            (cy - (radius * 0.7)).toFloat(),
-            radius / 8,
-            paintCircleBadge
-        )
+        if (!isCircleCompleted)
+            canvas.drawCircle(
+                (cx + (radius * 0.7)).toFloat(),
+                (cy - (radius * 0.7)).toFloat(),
+                radius / 8,
+                paintCircleBadge
+            )
     }
 
     private fun getColour(resId: Int): Int {

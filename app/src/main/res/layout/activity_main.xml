@@ -6,15 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.hosseinkurd.component.checkstepper.CheckStepperStateView
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:text="3"
-        android:textColor="@color/white"
+    <com.hosseinkurd.component.checkstepper.CheckStepper
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
         android:background="@color/teal_200"
+        android:text="3"
+        app:isAboveLineCompleted="false"
+        app:isBelowLineCompleted="false"
+        app:isCircleCompleted="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lineWidth="2dp"
+        app:showAboveLine="true"
+        app:showBelowLine="true"
+        app:stateTitle="2"
+        app:title="dsfdf" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,8 +22,11 @@ class CheckStepper @JvmOverloads constructor(
     private var lineWidth = 6f
     private var showBelowLine = false
     private var showAboveLine = false
-    private var isAboveLineSelected = false
-    private var isBelowLineSelected = false
+    private var isAboveLineCompleted = false
+    private var isBelowLineCompleted = false
+    private var isCircleCompleted = false
+    private var title: String? = null
+    private var stateTitle: String? = null
 
     init {
         val rootView =
@@ -38,22 +41,72 @@ class CheckStepper @JvmOverloads constructor(
                 defStyleAttr,
                 0
             )
+            title = typedArray.getString(R.styleable.CheckStepper_title)
+            stateTitle = typedArray.getString(R.styleable.CheckStepper_stateTitle)
+            title?.let {
+                textViewTitle.text = it
+            }
+            stateTitle?.let {
+                checkStepperStateView.text = it
+            }
             lineWidth = typedArray.getDimension(R.styleable.CheckStepper_lineWidth, 100F)
             showAboveLine = typedArray.getBoolean(R.styleable.CheckStepper_showAboveLine, false)
-            isAboveLineSelected =
-                typedArray.getBoolean(R.styleable.CheckStepper_isAboveLineSelected, false)
+            isAboveLineCompleted =
+                typedArray.getBoolean(R.styleable.CheckStepper_isAboveLineCompleted, false)
             showBelowLine = typedArray.getBoolean(R.styleable.CheckStepper_showBelowLine, false)
-            isBelowLineSelected =
-                typedArray.getBoolean(R.styleable.CheckStepper_isBelowLineSelected, false)
+            isBelowLineCompleted =
+                typedArray.getBoolean(R.styleable.CheckStepper_isBelowLineCompleted, false)
+            isCircleCompleted =
+                typedArray.getBoolean(R.styleable.CheckStepper_isCircleCompleted, false)
             checkStepperStateView.apply {
                 setLineWidth(lineWidth)
-                setLineWidth(lineWidth)
+                setShowAboveLine(showAboveLine)
                 setShowBelowLine(showBelowLine)
-                setAboveLineSelected(isAboveLineSelected)
-                setBelowLineSelected(isBelowLineSelected)
+                setAboveLineCompleted(isAboveLineCompleted)
+                setBelowLineCompleted(isBelowLineCompleted)
+                setCircleCompleted(isCircleCompleted)
                 invalidate()
             }
             typedArray.recycle()
         }
     }
+
+    fun setTitle(title: String) {
+        this.title = title
+    }
+
+    fun setStateTitle(stateTitle: String) {
+        this.stateTitle = stateTitle
+    }
+
+    fun setLineWidth(lineWidth: Float) {
+        this.lineWidth = lineWidth
+        checkStepperStateView.setLineWidth(lineWidth)
+    }
+
+    fun setShowAboveLine(showAboveLine: Boolean) {
+        this.showAboveLine = showAboveLine
+        checkStepperStateView.setShowAboveLine(showAboveLine)
+    }
+
+    fun setShowBelowLine(showBelowLine: Boolean) {
+        this.showBelowLine = showBelowLine
+        checkStepperStateView.setShowBelowLine(showBelowLine)
+    }
+
+    fun setAboveLineSelected(isAboveLineCompleted: Boolean) {
+        this.isAboveLineCompleted = isAboveLineCompleted
+        checkStepperStateView.setAboveLineCompleted(isAboveLineCompleted)
+    }
+
+    fun setBelowLineSelected(isBelowLineCompleted: Boolean) {
+        this.isBelowLineCompleted = isBelowLineCompleted
+        checkStepperStateView.setBelowLineCompleted(isBelowLineCompleted)
+    }
+
+    fun setCircleSelected(isCircleCompleted: Boolean) {
+        this.isCircleCompleted = isCircleCompleted
+        checkStepperStateView.setCircleCompleted(isCircleCompleted)
+    }
+
 }

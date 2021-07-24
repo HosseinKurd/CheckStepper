@@ -19,7 +19,8 @@ class CheckStepper @JvmOverloads constructor(
 
     private var textViewTitle: TextView
     private var checkStepperStateView: CheckStepperStateView
-    private var lineWidth = 6f
+    private var lineWidth = 2f
+    private var badgeCircleRadius = 2f
     private var showBelowLine = false
     private var showAboveLine = false
     private var isAboveLineCompleted = false
@@ -50,6 +51,7 @@ class CheckStepper @JvmOverloads constructor(
                 checkStepperStateView.text = it
             }
             lineWidth = typedArray.getDimension(R.styleable.CheckStepper_lineWidth, 100F)
+            badgeCircleRadius = typedArray.getDimension(R.styleable.CheckStepper_badgeCircleRadius, 100F)
             showAboveLine = typedArray.getBoolean(R.styleable.CheckStepper_showAboveLine, false)
             isAboveLineCompleted =
                 typedArray.getBoolean(R.styleable.CheckStepper_isAboveLineCompleted, false)
@@ -60,6 +62,7 @@ class CheckStepper @JvmOverloads constructor(
                 typedArray.getBoolean(R.styleable.CheckStepper_isCircleCompleted, false)
             checkStepperStateView.apply {
                 setLineWidth(lineWidth)
+                setBadgeCircleRadius(badgeCircleRadius)
                 setShowAboveLine(showAboveLine)
                 setShowBelowLine(showBelowLine)
                 setAboveLineCompleted(isAboveLineCompleted)
@@ -82,6 +85,11 @@ class CheckStepper @JvmOverloads constructor(
     fun setLineWidth(lineWidth: Float) {
         this.lineWidth = lineWidth
         checkStepperStateView.setLineWidth(lineWidth)
+    }
+
+    fun setBadgeCircleRadius(badgeCircleRadius: Float) {
+        this.badgeCircleRadius = badgeCircleRadius
+        checkStepperStateView.setBadgeCircleRadius(badgeCircleRadius)
     }
 
     fun setShowAboveLine(showAboveLine: Boolean) {

@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="CheckStepper">
         <attr name="lineWidth" format="dimension"/>
+        <attr name="badgeCircleRadius" format="dimension"/>
         <attr name="showAboveLine" format="boolean"/>
         <attr name="showBelowLine" format="boolean"/>
         <attr name="isBelowLineCompleted" format="boolean"/>

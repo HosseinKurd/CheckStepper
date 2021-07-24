@@ -22,7 +22,8 @@ class CheckStepperStateView @JvmOverloads constructor(
     defStyleAttr
 ) {
 
-    private var lineWidth = 6f
+    private var lineWidth = 2f
+    private var badgeCircleRadius = 2f
     private var showAboveLine = true
     private var showBelowLine = true
     private var isAboveLineCompleted = true
@@ -47,6 +48,11 @@ class CheckStepperStateView @JvmOverloads constructor(
 
     fun setLineWidth(lineWidth: Float) {
         this.lineWidth = lineWidth
+        invalidate()
+    }
+
+    fun setBadgeCircleRadius(badgeCircleRadius: Float) {
+        this.badgeCircleRadius = badgeCircleRadius
         invalidate()
     }
 
@@ -141,7 +147,7 @@ class CheckStepperStateView @JvmOverloads constructor(
             canvas.drawCircle(
                 (cx + (radius * 0.7)).toFloat(),
                 (cy - (radius * 0.7)).toFloat(),
-                radius / 8,
+                badgeCircleRadius,
                 paintCircleBadge
             )
     }

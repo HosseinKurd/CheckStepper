@@ -5,9 +5,21 @@
         <attr name="badgeCircleRadius" format="dimension"/>
         <attr name="showAboveLine" format="boolean"/>
         <attr name="showBelowLine" format="boolean"/>
-        <attr name="isBelowLineCompleted" format="boolean"/>
-        <attr name="isAboveLineCompleted" format="boolean"/>
-        <attr name="isCircleCompleted" format="boolean"/>
+        <attr name="belowLineCompleted" format="enum">
+            <enum name="COMPLETED" value="0"/>
+            <enum name="INCOMPLETED" value="1"/>
+            <enum name="UNCOMPLETED" value="2"/>
+        </attr>
+        <attr name="aboveLineCompleted" format="enum">
+            <enum name="COMPLETED" value="0"/>
+            <enum name="INCOMPLETED" value="1"/>
+            <enum name="UNCOMPLETED" value="2"/>
+        </attr>
+        <attr name="circleCompleted" format="enum">
+            <enum name="COMPLETED" value="0"/>
+            <enum name="INCOMPLETED" value="1"/>
+            <enum name="UNCOMPLETED" value="2"/>
+        </attr>
         <attr name="showCompletedText" format="boolean"/>
         <attr name="title" format="string|reference"/>
         <attr name="stateTitle" format="string|reference"/>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.annotation.StyleRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.hosseinkurd.component.checkstepper.enums.EnumCompleted
 
 class CheckStepper @JvmOverloads constructor(
     context: Context,
@@ -25,9 +26,9 @@ class CheckStepper @JvmOverloads constructor(
     private var badgeCircleRadius = 2f
     private var showBelowLine = false
     private var showAboveLine = false
-    private var isAboveLineCompleted = false
-    private var isBelowLineCompleted = false
-    private var isCircleCompleted = false
+    private var aboveLineCompleted: EnumCompleted = EnumCompleted.UNCOMPLETED
+    private var belowLineCompleted: EnumCompleted = EnumCompleted.UNCOMPLETED
+    private var circleCompleted: EnumCompleted = EnumCompleted.UNCOMPLETED
     private var showCompletedText = true
     private var title: String? = null
     private var stateTitle: String? = null
@@ -57,13 +58,22 @@ class CheckStepper @JvmOverloads constructor(
             badgeCircleRadius =
                 typedArray.getDimension(R.styleable.CheckStepper_badgeCircleRadius, 100F)
             showAboveLine = typedArray.getBoolean(R.styleable.CheckStepper_showAboveLine, false)
-            isAboveLineCompleted =
-                typedArray.getBoolean(R.styleable.CheckStepper_isAboveLineCompleted, false)
             showBelowLine = typedArray.getBoolean(R.styleable.CheckStepper_showBelowLine, false)
-            isBelowLineCompleted =
-                typedArray.getBoolean(R.styleable.CheckStepper_isBelowLineCompleted, false)
-            isCircleCompleted =
-                typedArray.getBoolean(R.styleable.CheckStepper_isCircleCompleted, false)
+            aboveLineCompleted =
+                EnumCompleted.values()[typedArray.getInt(
+                    R.styleable.CheckStepper_aboveLineCompleted,
+                    EnumCompleted.UNCOMPLETED.enumValue
+                )]
+            belowLineCompleted =
+                EnumCompleted.values()[typedArray.getInt(
+                    R.styleable.CheckStepper_belowLineCompleted,
+                    EnumCompleted.UNCOMPLETED.enumValue
+                )]
+            circleCompleted =
+                EnumCompleted.values()[typedArray.getInt(
+                    R.styleable.CheckStepper_circleCompleted,
+                    EnumCompleted.UNCOMPLETED.enumValue
+                )]
             showCompletedText =
                 typedArray.getBoolean(R.styleable.CheckStepper_showCompletedText, false)
             checkStepperStateView.apply {
@@ -71,9 +81,9 @@ class CheckStepper @JvmOverloads constructor(
                 setBadgeCircleRadius(badgeCircleRadius)
                 setShowAboveLine(showAboveLine)
                 setShowBelowLine(showBelowLine)
-                setAboveLineCompleted(isAboveLineCompleted)
-                setBelowLineCompleted(isBelowLineCompleted)
-                setCircleCompleted(isCircleCompleted)
+                setAboveLineCompleted(aboveLineCompleted)
+                setBelowLineCompleted(belowLineCompleted)
+                setCircleCompleted(circleCompleted)
                 setShowCompletedText(showCompletedText)
                 invalidate()
             }
@@ -125,19 +135,19 @@ class CheckStepper @JvmOverloads constructor(
         checkStepperStateView.setShowBelowLine(showBelowLine)
     }
 
-    fun setAboveLineSelected(isAboveLineCompleted: Boolean) {
-        this.isAboveLineCompleted = isAboveLineCompleted
-        checkStepperStateView.setAboveLineCompleted(isAboveLineCompleted)
+    fun setAboveLineSelected(aboveLineCompleted: EnumCompleted) {
+        this.aboveLineCompleted = aboveLineCompleted
+        checkStepperStateView.setAboveLineCompleted(aboveLineCompleted)
     }
 
-    fun setBelowLineSelected(isBelowLineCompleted: Boolean) {
-        this.isBelowLineCompleted = isBelowLineCompleted
-        checkStepperStateView.setBelowLineCompleted(isBelowLineCompleted)
+    fun setBelowLineSelected(belowLineCompleted: EnumCompleted) {
+        this.belowLineCompleted = belowLineCompleted
+        checkStepperStateView.setBelowLineCompleted(belowLineCompleted)
     }
 
-    fun setCircleSelected(isCircleCompleted: Boolean) {
-        this.isCircleCompleted = isCircleCompleted
-        checkStepperStateView.setCircleCompleted(isCircleCompleted)
+    fun setCircleSelected(circleCompleted: EnumCompleted) {
+        this.circleCompleted = circleCompleted
+        checkStepperStateView.setCircleCompleted(circleCompleted)
     }
 
 }

@@ -9,6 +9,7 @@ import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
+import com.hosseinkurd.component.checkstepper.enums.EnumCompleted
 import kotlin.math.sqrt
 
 class CheckStepperStateView @JvmOverloads constructor(
@@ -26,9 +27,9 @@ class CheckStepperStateView @JvmOverloads constructor(
     private var badgeCircleRadius = 2f
     private var showAboveLine = true
     private var showBelowLine = true
-    private var isAboveLineCompleted = true
-    private var isBelowLineCompleted = true
-    private var isCircleCompleted = true
+    private var aboveLineCompleted: EnumCompleted = EnumCompleted.UNCOMPLETED
+    private var belowLineCompleted: EnumCompleted = EnumCompleted.UNCOMPLETED
+    private var circleCompleted: EnumCompleted = EnumCompleted.UNCOMPLETED
     private var showCompletedText = true
 
     init {
@@ -67,18 +68,18 @@ class CheckStepperStateView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun setAboveLineCompleted(isAboveLineSelected: Boolean) {
-        this.isAboveLineCompleted = isAboveLineSelected
+    fun setAboveLineCompleted(aboveLineSelected: EnumCompleted) {
+        this.aboveLineCompleted = aboveLineSelected
         invalidate()
     }
 
-    fun setBelowLineCompleted(isBelowLineSelected: Boolean) {
-        this.isBelowLineCompleted = isBelowLineSelected
+    fun setBelowLineCompleted(belowLineSelected: EnumCompleted) {
+        this.belowLineCompleted = belowLineSelected
         invalidate()
     }
 
-    fun setCircleCompleted(isCircleSelected: Boolean) {
-        this.isCircleCompleted = isCircleSelected
+    fun setCircleCompleted(circleSelected: EnumCompleted) {
+        this.circleCompleted = circleSelected
         invalidate()
     }
 
@@ -103,28 +104,46 @@ class CheckStepperStateView @JvmOverloads constructor(
             isAntiAlias = true
         }
         paintCircleCenter.apply {
-            color = if (isCircleCompleted) {
-                getColour(R.color.selected_background)
-            } else {
-                getColour(R.color.unselected_background)
+            color = when (circleCompleted) {
+                EnumCompleted.COMPLETED -> {
+                    getColour(R.color.background_completed)
+                }
+                EnumCompleted.INCOMPLETED -> {
+                    getColour(R.color.background_incompleted)
+                }
+                else -> {
+                    getColour(R.color.background_uncompleted)
+                }
             }
             style = Paint.Style.FILL
             isAntiAlias = true
         }
         paintLineUp.apply {
-            color = if (isAboveLineCompleted) {
-                getColour(R.color.selected_background)
-            } else {
-                getColour(R.color.unselected_background)
+            color = when (aboveLineCompleted) {
+                EnumCompleted.COMPLETED -> {
+                    getColour(R.color.background_completed)
+                }
+                EnumCompleted.INCOMPLETED -> {
+                    getColour(R.color.background_incompleted)
+                }
+                else -> {
+                    getColour(R.color.background_uncompleted)
+                }
             }
             style = Paint.Style.FILL
             isAntiAlias = true
         }
         paintLineDown.apply {
-            color = if (isBelowLineCompleted) {
-                getColour(R.color.selected_background)
-            } else {
-                getColour(R.color.unselected_background)
+            color = when (belowLineCompleted) {
+                EnumCompleted.COMPLETED -> {
+                    getColour(R.color.background_completed)
+                }
+                EnumCompleted.INCOMPLETED -> {
+                    getColour(R.color.background_incompleted)
+                }
+                else -> {
+                    getColour(R.color.background_uncompleted)
+                }
             }
             style = Paint.Style.FILL
             isAntiAlias = true
@@ -149,14 +168,14 @@ class CheckStepperStateView @JvmOverloads constructor(
         if (showBelowLine)
             canvas.drawPath(pathLineDown, paintLineDown)
         canvas.drawCircle(cx, cy, radius, paintCircleCenter)
-        if (!isCircleCompleted)
+        if (circleCompleted == EnumCompleted.INCOMPLETED)
             canvas.drawCircle(
                 (cx + (radius * 0.7)).toFloat(),
                 (cy - (radius * 0.7)).toFloat(),
                 badgeCircleRadius,
                 paintCircleBadge
             )
-        else if (showCompletedText)
+        else if (circleCompleted == EnumCompleted.COMPLETED && showCompletedText)
             setText(R.string.state_title_completed)
 
     }

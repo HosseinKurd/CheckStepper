@@ -1,9 +1,11 @@
 package com.hosseinkurd.component.checkstepper
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
+import androidx.annotation.StyleRes
 import androidx.constraintlayout.widget.ConstraintLayout
 
 class CheckStepper @JvmOverloads constructor(
@@ -17,8 +19,8 @@ class CheckStepper @JvmOverloads constructor(
     defStyleAttr
 ) {
 
-    private var textViewTitle: TextView
-    private var checkStepperStateView: CheckStepperStateView
+    var textViewTitle: TextView
+    var checkStepperStateView: CheckStepperStateView
     private var lineWidth = 2f
     private var badgeCircleRadius = 2f
     private var showBelowLine = false
@@ -51,7 +53,8 @@ class CheckStepper @JvmOverloads constructor(
                 checkStepperStateView.text = it
             }
             lineWidth = typedArray.getDimension(R.styleable.CheckStepper_lineWidth, 100F)
-            badgeCircleRadius = typedArray.getDimension(R.styleable.CheckStepper_badgeCircleRadius, 100F)
+            badgeCircleRadius =
+                typedArray.getDimension(R.styleable.CheckStepper_badgeCircleRadius, 100F)
             showAboveLine = typedArray.getBoolean(R.styleable.CheckStepper_showAboveLine, false)
             isAboveLineCompleted =
                 typedArray.getBoolean(R.styleable.CheckStepper_isAboveLineCompleted, false)
@@ -71,6 +74,22 @@ class CheckStepper @JvmOverloads constructor(
                 invalidate()
             }
             typedArray.recycle()
+        }
+    }
+
+    fun setTitleTextAppearance(@StyleRes resId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            textViewTitle.setTextAppearance(resId)
+        } else {
+            textViewTitle.setTextAppearance(context, resId)
+        }
+    }
+
+    fun setCheckStepperStateViewTextAppearance(@StyleRes resId: Int) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkStepperStateView.setTextAppearance(resId)
+        } else {
+            checkStepperStateView.setTextAppearance(context, resId)
         }
     }
 

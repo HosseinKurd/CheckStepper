@@ -68,18 +68,18 @@ class CheckStepperStateView @JvmOverloads constructor(
         invalidate()
     }
 
-    fun setAboveLineCompleted(aboveLineSelected: EnumCompleted) {
-        this.aboveLineCompleted = aboveLineSelected
+    fun setAboveLineCompleted(aboveLineCompleted: EnumCompleted) {
+        this.aboveLineCompleted = aboveLineCompleted
         invalidate()
     }
 
-    fun setBelowLineCompleted(belowLineSelected: EnumCompleted) {
-        this.belowLineCompleted = belowLineSelected
+    fun setBelowLineCompleted(belowLineCompleted: EnumCompleted) {
+        this.belowLineCompleted = belowLineCompleted
         invalidate()
     }
 
-    fun setCircleCompleted(circleSelected: EnumCompleted) {
-        this.circleCompleted = circleSelected
+    fun setCircleCompleted(circleCompleted: EnumCompleted) {
+        this.circleCompleted = circleCompleted
         invalidate()
     }
 

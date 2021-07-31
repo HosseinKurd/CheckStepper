@@ -12,8 +12,8 @@
         </attr>
         <attr name="aboveLineCompleted" format="enum">
             <enum name="COMPLETED" value="0"/>
-            <enum name="INCOMPLETED" value="1"/>
-            <enum name="UNCOMPLETED" value="2"/>
+                <enum name="INCOMPLETED" value="1"/>
+                <enum name="UNCOMPLETED" value="2"/>
         </attr>
         <attr name="circleCompleted" format="enum">
             <enum name="COMPLETED" value="0"/>

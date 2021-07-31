@@ -135,17 +135,35 @@ class CheckStepper @JvmOverloads constructor(
         checkStepperStateView.setShowBelowLine(showBelowLine)
     }
 
+    @Deprecated("Deprecated, Remove in next version", ReplaceWith("Use {@link #setAboveLineCompleted(EnumCompleted)} instead"), DeprecationLevel.WARNING)
     fun setAboveLineSelected(aboveLineCompleted: EnumCompleted) {
         this.aboveLineCompleted = aboveLineCompleted
         checkStepperStateView.setAboveLineCompleted(aboveLineCompleted)
     }
 
+    fun setAboveLineCompleted(aboveLineCompleted: EnumCompleted) {
+        this.aboveLineCompleted = aboveLineCompleted
+        checkStepperStateView.setAboveLineCompleted(aboveLineCompleted)
+    }
+
+    @Deprecated("Deprecated, Remove in next version", ReplaceWith("Use {@link #setBelowLineCompleted(EnumCompleted)} instead"), DeprecationLevel.WARNING)
     fun setBelowLineSelected(belowLineCompleted: EnumCompleted) {
         this.belowLineCompleted = belowLineCompleted
         checkStepperStateView.setBelowLineCompleted(belowLineCompleted)
     }
 
+    fun setBelowLineCompleted(belowLineCompleted: EnumCompleted) {
+        this.belowLineCompleted = belowLineCompleted
+        checkStepperStateView.setBelowLineCompleted(belowLineCompleted)
+    }
+
+    @Deprecated("Deprecated, Remove in next version", ReplaceWith("Use {@link #setCircleCompleted(EnumCompleted)} instead"), DeprecationLevel.WARNING)
     fun setCircleSelected(circleCompleted: EnumCompleted) {
+        this.circleCompleted = circleCompleted
+        checkStepperStateView.setCircleCompleted(circleCompleted)
+    }
+
+    fun setCircleCompleted(circleCompleted: EnumCompleted) {
         this.circleCompleted = circleCompleted
         checkStepperStateView.setCircleCompleted(circleCompleted)
     }

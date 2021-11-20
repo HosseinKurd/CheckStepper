@@ -18,7 +18,7 @@ Add it to your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.HosseinKurd:CheckStepperss:$version'
+	        implementation 'com.github.HosseinKurd:CheckStepper:$version'
 	}
 
 # Kotlin sample Code:

@@ -1,14 +1,12 @@
 package com.hosseinkurd.component.checkstepper
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
 import android.os.Build
 import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.graphics.drawable.toDrawable
 import com.hosseinkurd.component.checkstepper.enums.EnumCompleted
 import kotlin.math.sqrt
 
@@ -177,6 +175,8 @@ class CheckStepperStateView @JvmOverloads constructor(
             )
         else if (circleCompleted == EnumCompleted.COMPLETED && showCompletedText)
             setText(R.string.state_title_completed)
+//        else if (circleCompleted == EnumCompleted.COMPLETED && !showCompletedText)
+//            foreground=BitmapFactory.decodeResource(R.drawable.ic_check_mark, 0).toDrawable()
 
     }
 
